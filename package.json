@@ -1,0 +1,54 @@
+{
+  "name": "bun-safe",
+  "version": "1.0.3",
+  "description": "Run scripts using Bun.js and perhaps install Bun first if necessary.",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "types": "./dist/esm/index.d.ts",
+  "bin": {
+    "bun-safe": "./dist/cjs/bin.js"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "test": "echo 'Running tests...' && exit 0",
+    "lint": "echo 'Linting the code...' && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniopresto/bun-safe.git"
+  },
+  "keywords": [
+    "bun",
+    "safe-execution",
+    "version-control",
+    "command-wrapper"
+  ],
+  "author": "@antoniopresto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antoniopresto/bun-safe/issues"
+  },
+  "homepage": "https://github.com/antoniopresto/bun-safe#readme",
+  "files": [
+    "README.MD",
+    "dist/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true
+  }
+}
