@@ -1,6 +1,6 @@
 {
   "name": "bun-safe",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Run scripts using Bun.js and perhaps install Bun first if necessary.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -42,6 +42,9 @@
     "README.MD",
     "dist/*"
   ],
+  "dependencies": {
+    "bun-types": "latest"
+  },
   "devDependencies": {
     "@types/node": "^20.11.5",
     "prettier": "^3.2.4",

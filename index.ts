@@ -1,3 +1,5 @@
+/// <reference types="bun-types" />
+
 import * as child_process from 'child_process';
 
 const has = () => {
