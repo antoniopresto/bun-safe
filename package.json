@@ -1,26 +1,41 @@
 {
   "name": "bun-safe",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Run scripts using Bun.js and perhaps install Bun first if necessary.",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "bin": {
+    "bun-safe": "./out/bin.cjs"
+  },
+  "typings": "out",
+  "author": "antoniopresto <antoniopresto@gmail.com>",
+  "type": "module",
+  "main": "./out/index.cjs",
+  "module": "./out/module/index.mjs",
+  "types": "./out/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js"
+      "types": "./out/index.d.ts",
+      "import": "./out/module/index.mjs",
+      "require": "./out/index.cjs"
     }
   },
-  "types": "./dist/esm/index.d.ts",
-  "bin": {
-    "bun-safe": "./dist/cjs/bin.js"
+  "browser": {
+    "out/module/index.mjs": "./out/browser/module/index.mjs",
+    "out/index.cjs": "./out/browser/index.cjs"
   },
+  "sideEffects": false,
+  "license": "MIT",
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "test": "echo 'Running tests...' && exit 0",
-    "lint": "echo 'Linting the code...' && exit 0"
+    "test": "echo ok",
+    "build": "run-s clear && run-p declarations build:*",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"src/**/*.ts\" --write",
+    "clear": "rimraf out",
+    "prepublishOnly": "run-s build fix && run-p test",
+    "build-targets": "run-p build:*",
+    "build:node": "TARGET=node npm run babild -- --out-dir out --out-file-extension .cjs",
+    "build:module-node": "TARGET=module-node npm run babild -- --out-dir out/module --out-file-extension .mjs",
+    "declarations": "tsc -p tsconfig.json",
+    "babild": "babel 'src' --extensions '.ts,.tsx' --source-maps=true --ignore '**/__tests__'"
   },
   "repository": {
     "type": "git",
@@ -32,22 +47,25 @@
     "version-control",
     "command-wrapper"
   ],
-  "author": "@antoniopresto",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/antoniopresto/bun-safe/issues"
   },
   "homepage": "https://github.com/antoniopresto/bun-safe#readme",
   "files": [
     "README.MD",
-    "dist/*"
+    "out/*",
+    "package.json"
   ],
   "dependencies": {
     "bun-types": "latest"
   },
   "devDependencies": {
+    "@powership/boilerplate": "3.2.2-2.1",
+    "@babel/cli": "^7.23.9",
     "@types/node": "^20.11.5",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   },
   "prettier": {

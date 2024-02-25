@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "out",
     "target": "ES2015",
     "module": "ES2020",
     "strict": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   }
