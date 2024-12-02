@@ -1,6 +1,6 @@
 {
   "name": "bun-safe",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Run scripts using Bun.js and perhaps install Bun first if necessary.",
   "bin": {
     "bun-safe": "./out/bin.cjs"
@@ -18,19 +18,14 @@
       "require": "./out/index.cjs"
     }
   },
-  "browser": {
-    "out/module/index.mjs": "./out/browser/module/index.mjs",
-    "out/index.cjs": "./out/browser/index.cjs"
-  },
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "test": "echo ok",
     "build": "run-s clear && run-p declarations build:*",
     "fix": "run-s fix:*",
     "fix:prettier": "prettier \"src/**/*.ts\" --write",
     "clear": "rimraf out",
-    "prepublishOnly": "run-s build fix && run-p test",
+    "prepublishOnly": "run-s build fix",
     "build-targets": "run-p build:*",
     "build:node": "TARGET=node npm run babild -- --out-dir out --out-file-extension .cjs",
     "build:module-node": "TARGET=module-node npm run babild -- --out-dir out/module --out-file-extension .mjs",
@@ -60,13 +55,13 @@
     "bun-types": "latest"
   },
   "devDependencies": {
-    "@powership/boilerplate": "3.2.2-2.1",
-    "@babel/cli": "^7.23.9",
-    "@types/node": "^20.11.5",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^3.2.4",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "@babel/cli": "latest",
+    "@powership/boilerplate": "latest",
+    "@types/node": "latest",
+    "npm-run-all": "latest",
+    "prettier": "latest",
+    "rimraf": "latest",
+    "typescript": "latest"
   },
   "prettier": {
     "singleQuote": true,
